@@ -139,7 +139,7 @@ touch .env
 # MongoDB URI
 MONGO_URI=mongodb://localhost:27017/mern-oauth
 # OR for MongoDB Atlas:
-# MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/mern-oauth
+# MONGO_URI=mongodb+srv://username:mongodb username
 
 # Session Secret
 COOKIE_KEY=your_secret_key_here
