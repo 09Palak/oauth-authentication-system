@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const BASE_URL = "https://oauth-authentication-system.onrender.com"; // 👈 backend URL
+
 export default function Profile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/user", { withCredentials: true })
-      .then(res => setUser(res.data));
+    axios.get(`${BASE_URL}/user`, { withCredentials: true })
+      .then(res => setUser(res.data))
+      .catch(err => console.log(err));
   }, []);
 
   const logout = () => {
-    window.location.href = "http://localhost:5000/logout";
+    window.location.href = `${BASE_URL}/logout`;
   };
 
   return (
