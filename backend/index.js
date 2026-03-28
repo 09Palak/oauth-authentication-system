@@ -8,7 +8,7 @@ import session from "express-session";
 const app = express();
 
 // 👉 yahan apna frontend Vercel URL daalo
-const CLIENT_URL = "https://oauth-authentication-system-slw1-7v5dr9u8x-09palaks-projects.vercel.app/";
+const CLIENT_URL = "https://oauth-authentication-system-slw1-7v5dr9u8x-09palaks-projects.vercel.app";
 
 // CORS
 app.use(
