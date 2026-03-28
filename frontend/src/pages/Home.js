@@ -9,7 +9,6 @@ export default function Home() {
         <p>Login to continue</p>
 
         <button className="google-btn" onClick={google}>Continue with Google</button>
-        <button className="facebook-btn" onClick={facebook}>Continue with Facebook</button>
       </div>
     </div>
   );
