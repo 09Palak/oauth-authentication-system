@@ -1,6 +1,5 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { Strategy as FacebookStrategy } from "passport-facebook";
 import User from "../models/User.js";
 
 // ✅ Serialize
@@ -49,34 +48,5 @@ passport.use(
   )
 );
 
-// 🔥 FACEBOOK STRATEGY (direct values daali hain)
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: "YOUR_FACEBOOK_APP_ID",        // 👈 yahan daalo
-      clientSecret: "YOUR_FACEBOOK_APP_SECRET",// 👈 yahan daalo
-      callbackURL: "https://oauth-authentication-system.onrender.com/auth/facebook/callback",
-      profileFields: ["id", "displayName", "photos", "email"],
-    },
-    async (_, __, profile, done) => {
-      try {
-        const userData = {
-          facebookId: profile.id,
-          name: profile.displayName,
-          email: profile.emails?.[0]?.value ?? null,
-          photo: profile.photos?.[0]?.value ?? null,
-        };
-
-        let user = await User.findOneAndUpdate(
-          { facebookId: profile.id },
-          userData,
-          { new: true, upsert: true }
-        );
-
-        return done(null, user);
-      } catch (err) {
-        return done(err, null);
-      }
-    }
   )
 );
