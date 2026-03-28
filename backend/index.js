@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
 import express from "express";
 import mongoose from "mongoose";
 import passport from "passport";
@@ -8,19 +5,12 @@ import "./config/passport.js";
 import cors from "cors";
 import session from "express-session";
 
-// ✅ __dirname setup
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ load env
-dotenv.config({ path: path.join(__dirname, ".env") });
-
 const app = express();
 
-// ✅ IMPORTANT: Render + Vercel frontend URL
-const CLIENT_URL = "https://your-frontend.vercel.app"; // 👈 yahan apna frontend URL daalna
+// 👉 yahan apna frontend Vercel URL daalo
+const CLIENT_URL = "https://your-frontend.vercel.app";
 
-// ✅ CORS fix
+// CORS
 app.use(
   cors({
     origin: CLIENT_URL,
@@ -28,53 +18,50 @@ app.use(
   })
 );
 
-// ✅ session config
+// Session
 app.use(
   session({
-    secret: process.env.COOKIE_KEY,
+    secret: "mysecretkey", // 👈 direct daal diya
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// ✅ passport
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ✅ DB connect
-mongoose.connect(process.env.MONGO_URI)
+// MongoDB (👉 apna connection string daalo)
+mongoose
+  .connect("mongodb+srv://username:password@cluster.mongodb.net/dbname")
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
-// ✅ routes
+// Routes
 app.get("/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 app.get("/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
-  (req, res) => res.redirect(`${CLIENT_URL}/profile`) // 👈 fix
-);
-
-app.get("/auth/facebook",
-  passport.authenticate("facebook")
-);
-
-app.get("/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/" }),
-  (req, res) => res.redirect(`${CLIENT_URL}/profile`) // 👈 fix
+  (req, res) => res.redirect(`${CLIENT_URL}/profile`)
 );
 
 app.get("/logout", (req, res) => {
   req.logout(() => {
     req.session.destroy();
-    res.redirect(CLIENT_URL); // 👈 fix
+    res.redirect(CLIENT_URL);
   });
 });
 
-app.get("/user", (req, res) => res.send(req.user));
+app.get("/user", (req, res) => res.send(req.user || null));
 
-// ✅ IMPORTANT PORT FIX (MOST IMPORTANT 🔥)
+// Test
+app.get("/", (req, res) => {
+  res.send("Backend running 🚀");
+});
+
+// 🔥 PORT FIX
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
