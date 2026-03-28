@@ -33,7 +33,7 @@ app.use(passport.session());
 
 // MongoDB (👉 apna connection string daalo)
 mongoose
-  .connect("mongodb+srv://username:password@cluster.mongodb.net/dbname")
+  .connect("mongodb+srv://palaksharmahp16_db_user:Palak%40123@cluster0.jopyty7.mongodb.net/oauthDB?retryWrites=true&w=majority")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
