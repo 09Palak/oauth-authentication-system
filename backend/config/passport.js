@@ -22,8 +22,8 @@ passport.deserializeUser(async (id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: "YOUR_GOOGLE_CLIENT_ID",          // 👈 yahan daalo
-      clientSecret: "YOUR_GOOGLE_CLIENT_SECRET",  // 👈 yahan daalo
+      clientID: "322355776615-jrtppkobq32sscoer5l54g14laa7b8sa.apps.googleusercontent.com",          // 👈 yahan daalo
+      clientSecret: "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",  // 👈 yahan daalo
       callbackURL: "https://oauth-authentication-system.onrender.com/auth/google/callback",
     },
     async (_, __, profile, done) => {
