@@ -1,8 +1,6 @@
 export default function Home() {
   const google = () =>
-    window.location.href =
-      "https://oauth-authentication-system.onrender.com/auth/google"; // 👈 FIXED
-
+   window.open("https://oauth-authentication-system.onrender.com/auth/google", "_self");
   return (
     <div className="home-container">
       <div className="login-box">
