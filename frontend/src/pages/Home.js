@@ -1,6 +1,5 @@
 export default function Home() {
   const google = () => window.location.href = "http://localhost:5000/auth/google";
-  const facebook = () => window.location.href = "http://localhost:5000/auth/facebook";
 
   return (
     <div className="home-container">
