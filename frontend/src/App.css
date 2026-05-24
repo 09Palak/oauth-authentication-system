@@ -1,11 +1,9 @@
-/* Center page layout */
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   background: #f0f2f5;
 }
 
-/* Home Page */
 .home-container {
   display: flex;
   justify-content: center;
@@ -43,7 +41,6 @@ body {
   transition: 0.3s;
 }
 
-/* Google Button */
 .google-btn {
   background-color: #db4437;
   color: white;
@@ -61,7 +58,6 @@ body {
   background-color: #0f5fd6;
 }
 
-/* Profile Page */
 .profile-container {
   display: flex;
   justify-content: center;
