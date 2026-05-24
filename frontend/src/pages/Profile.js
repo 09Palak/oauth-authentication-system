@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://oauth-authentication-system.onrender.com"; // 👈 backend URL
+const BASE_URL = "https://oauth-authentication-system.onrender.com"; 
 
 export default function Profile() {
   const [user, setUser] = useState(null);
