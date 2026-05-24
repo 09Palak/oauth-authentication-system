@@ -7,10 +7,8 @@ import session from "express-session";
 
 const app = express();
 
-// 👉 yahan apna frontend Vercel URL daalo
 const CLIENT_URL = "https://oauth-authentication-system.vercel.app";
 
-// CORS
 app.use(
   cors({
     origin: CLIENT_URL,
@@ -18,26 +16,23 @@ app.use(
   })
 );
 
-// Session
 app.use(
   session({
-    secret: "mysecretkey", // 👈 direct daal diya
+    secret: "mysecretkey", 
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// MongoDB (👉 apna connection string daalo)
 mongoose
   .connect("mongodb+srv://palaksharmahp16_db_user:Palak%40123@cluster0.jopyty7.mongodb.net/oauthDB?retryWrites=true&w=majority")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// Routes
+
 app.get("/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
@@ -56,12 +51,10 @@ app.get("/logout", (req, res) => {
 
 app.get("/user", (req, res) => res.send(req.user || null));
 
-// Test
 app.get("/", (req, res) => {
   res.send("Backend running 🚀");
 });
 
-// 🔥 PORT FIX
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
